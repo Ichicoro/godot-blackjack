@@ -1,40 +1,280 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/Card.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/table_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/buttons/hit_button.png" type="Texture" id=3]
+[ext_resource path="res://assets/dealer_icon.png" type="Texture" id=4]
+[ext_resource path="res://scenes/TopBar.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/small_table_font.tres" type="DynamicFont" id=6]
+[ext_resource path="res://assets/9patch.png" type="Texture" id=7]
+[ext_resource path="res://scripts/TableManager.gd" type="Script" id=8]
 
-[sub_resource type="GDScript" id=1]
-script/source = "extends Control
-
-const CardScene = preload(\"res://scenes/Card.tscn\")
-
-func _ready():
-	pass
-	var card = CardScene.instance().init(Card.CardSign.HEARTS, Card.CardType.FOUR)
-	card.rect_scale = Vector2(2,2)
-	add_child(card)
-"
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.184314, 0.4, 0.239216, 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.184314, 0.4, 0.239216, 1 )
+bg_color = Color( 0, 0, 0, 0.313726 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Label
+
+var changed = false
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	visible_characters = 0
+	pass # Replace with function body.
+
+
+func set_text(text):
+	self.text = text
+	changed = true
+	visible_characters = 0
+
+
+func _on_TextTimer_timeout():
+	if visible_characters <= len(text):
+		visible_characters += 1
+	else:
+		changed = false
+"
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = SubResource( 1 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = 0.263489
+margin_bottom = 0.263489
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HandLabel" type="Label" parent="."]
+margin_left = 34.0
+margin_top = 312.0
+margin_right = 178.0
+margin_bottom = 334.0
+custom_fonts/font = ExtResource( 2 )
+text = "YOUR HAND"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HandPanel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 332.0
+margin_right = -33.0
+margin_bottom = -116.0
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Card2" parent="." instance=ExtResource( 1 )]
-margin_left = 185.661
-margin_top = 189.75
-margin_right = 185.581
-margin_bottom = 190.006
+[node name="GridContainer" type="GridContainer" parent="HandPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -183.0
+margin_bottom = -32.0
 rect_scale = Vector2( 2, 2 )
-card_type = 5
+custom_constants/hseparation = 16
+columns = 11
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Card" parent="HandPanel/GridContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+card_type = 2
+card_sign = 2
+
+[node name="Card2" parent="HandPanel/GridContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 16.0
+margin_right = 16.0
+margin_bottom = 0.0
+card_type = 8
+
+[node name="Card3" parent="HandPanel/GridContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 32.0
+margin_right = 32.0
+margin_bottom = 0.0
+card_type = 6
+card_sign = 3
+
+[node name="Card4" parent="HandPanel/GridContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 48.0
+margin_right = 48.0
+margin_bottom = 0.0
+card_type = 3
 card_sign = 1
+
+[node name="Card5" parent="HandPanel/GridContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 64.0
+margin_right = 64.0
+margin_bottom = 0.0
+card_type = 1
+card_sign = 3
+
+[node name="DealerLabel" type="Label" parent="."]
+margin_left = 34.0
+margin_top = 181.0
+margin_right = 242.0
+margin_bottom = 203.0
+custom_fonts/font = ExtResource( 2 )
+text = "DEALER'S HAND"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DealerPanel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 201.0
+margin_right = -33.0
+margin_bottom = -247.0
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="DealerPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -183.0
+margin_bottom = -32.0
+rect_scale = Vector2( 2, 2 )
+custom_constants/hseparation = 16
+columns = 11
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Card" parent="DealerPanel/GridContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+card_type = 2
+card_sign = 2
+
+[node name="Card2" parent="DealerPanel/GridContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 16.0
+margin_right = 16.0
+margin_bottom = 0.0
+card_type = 8
+
+[node name="Card3" parent="DealerPanel/GridContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 32.0
+margin_right = 32.0
+margin_bottom = 0.0
+card_type = 6
+card_sign = 3
+
+[node name="Card4" parent="DealerPanel/GridContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 48.0
+margin_right = 48.0
+margin_bottom = 0.0
+card_type = 3
+card_sign = 1
+
+[node name="Card5" parent="DealerPanel/GridContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 64.0
+margin_right = 64.0
+margin_bottom = 0.0
+card_type = 1
+card_sign = 3
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = 313.817
+margin_top = 443.712
+margin_right = 345.817
+margin_bottom = 459.712
+rect_scale = Vector2( 3, 3 )
+texture_normal = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" parent="." instance=ExtResource( 5 )]
+
+[node name="Dealer" type="Control" parent="."]
+margin_left = 34.0
+margin_top = 69.0
+margin_right = 402.0
+margin_bottom = 133.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Dealer"]
+modulate = Color( 0.0941176, 0.0941176, 0.0941176, 0.184314 )
+margin_right = 92.0
+margin_bottom = 16.0
+rect_scale = Vector2( 4, 4 )
+texture = ExtResource( 7 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DealerText" type="Label" parent="Dealer"]
+margin_left = 70.0
+margin_top = 7.0
+margin_right = 363.0
+margin_bottom = 59.0
+custom_fonts/font = ExtResource( 6 )
+text = "HELLO, I AM A CARD DEALER. I ENJOY REPRESENTING \"THE HOUSE\" IN THE GAME OF BLACKJACK.
+HOW MUCH ARE YOU WILLING TO BET?"
+autowrap = true
+script = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DealerPicture" type="TextureRect" parent="Dealer"]
+margin_left = 0.218475
+margin_top = -0.0664978
+margin_right = 33.2185
+margin_bottom = 31.9335
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextTimer" type="Timer" parent="Dealer"]
+wait_time = 0.05
+autostart = true
+[connection signal="timeout" from="Dealer/TextTimer" to="Dealer/DealerText" method="_on_TextTimer_timeout"]

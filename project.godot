@@ -22,7 +22,7 @@ _global_script_class_icons={
 
 config/name="Blackjack"
 run/main_scene="res://scenes/GameView.tscn"
-config/icon="res://icon.png"
+config/icon="res://assets/dealer_icon.png"
 
 [display]
 
@@ -34,7 +34,6 @@ window/stretch/aspect="keep"
 
 [gui]
 
-common/swap_ok_cancel=true
 theme/use_hidpi=true
 
 [rendering]

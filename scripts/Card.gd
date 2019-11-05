@@ -1,5 +1,6 @@
 extends Control
 class_name Card
+#signal ready
 
 tool
 
@@ -49,6 +50,7 @@ func _ready():
 	#print("CardSignTexture: ", $CardSignTexture)
 	$CardTypeLabel.text = get_type_name(self.card_type)
 	$CardSignTexture.texture = get_sign_icon(self.card_sign)
+	emit_signal("ready")
 
 
 static func get_sign_icon(card_sign):
@@ -79,6 +81,8 @@ static func get_sign_color(card_sign):
 
 
 func card_type_set(new_card_type):
+	if not Engine.is_editor_hint():
+		yield(self, "ready")
 	card_type = new_card_type
 	$CardTypeLabel.text = get_type_name(self.card_type)
 
@@ -87,6 +91,8 @@ func card_type_get():
 
 
 func card_sign_set(new_card_sign):
+	if not Engine.is_editor_hint():
+		yield(self, "ready")
 	card_sign = new_card_sign
 	$CardSignTexture.texture = get_sign_icon(self.card_sign)
 	if card_sign == CardSign.DIAMONDS:

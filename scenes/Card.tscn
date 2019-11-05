@@ -8,34 +8,29 @@
 [node name="Card" type="Control"]
 anchor_right = 0.056
 anchor_bottom = 0.062
-margin_right = -0.079998
+margin_right = -0.0799999
 margin_bottom = 0.255999
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-card_type = 3
 
 [node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -1.90735e-06
+margin_top = 0.112968
+margin_right = -1.90735e-006
+margin_bottom = 0.11297
 texture = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CardSignTexture" type="TextureRect" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -17.0
-margin_top = -17.0
-margin_right = -3.0
-margin_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
+margin_left = 7.0
+margin_top = 15.0
+margin_right = 21.0
+margin_bottom = 29.0
 texture = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -48,7 +43,7 @@ margin_right = 11.0
 margin_bottom = 11.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "3"
+text = "K"
 __meta__ = {
 "_edit_use_anchors_": false
 }
