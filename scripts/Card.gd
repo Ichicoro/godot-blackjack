@@ -27,8 +27,8 @@ enum CardType {
 	KING
 }
 
-export(CardType) var card_type: int setget card_type_set, card_type_get
-export(CardSign) var card_sign: int setget card_sign_set, card_sign_get
+export(CardType) var card_type: int setget card_type_set
+export(CardSign) var card_sign: int setget card_sign_set
 
 
 const sign_images = [
@@ -46,8 +46,6 @@ func init(card_sign: int, card_type: int):
 
 
 func _ready():
-	print(get_children())
-	#print("CardSignTexture: ", $CardSignTexture)
 	$CardTypeLabel.text = get_type_name(self.card_type)
 	$CardSignTexture.texture = get_sign_icon(self.card_sign)
 	emit_signal("ready")
@@ -58,7 +56,7 @@ static func get_sign_icon(card_sign):
 
 static func get_type_name(card_type):
 	return [
-		"1",
+		"A",
 		"2",
 		"3",
 		"4",
@@ -86,9 +84,9 @@ static func get_type_value(card_type):
 		8,
 		9,
 		10,
-		11,
-		12,
-		13,
+		10,  #J
+		10,  #Q
+		10,  #K
 	][card_type-1]
 
 
@@ -103,7 +101,10 @@ static func generate_deck():
 	var temp_deck = []
 	for ctype in CardType:
 		for csign in CardSign:
-			temp_deck.append({"type": ctype, "sign": csign})
+			temp_deck.append({"card_type": ctype, "card_sign": csign})
+	randomize()
+	temp_deck.shuffle()
+	return temp_deck
 
 
 func card_type_set(new_card_type):
@@ -111,9 +112,6 @@ func card_type_set(new_card_type):
 		yield(self, "ready")
 	card_type = new_card_type
 	$CardTypeLabel.text = get_type_name(self.card_type)
-
-func card_type_get():
-	return card_type
 
 
 func card_sign_set(new_card_sign):
@@ -127,5 +125,3 @@ func card_sign_set(new_card_sign):
 		$CardSignTexture.rect_position = Vector2(7, 15)
 	$CardTypeLabel.add_color_override("font_color", get_sign_color(self.card_sign))
 
-func card_sign_get():
-	return card_sign
