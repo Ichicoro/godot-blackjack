@@ -5,6 +5,8 @@
 [ext_resource path="res://assets/card_icons/clubs.png" type="Texture" id=3]
 [ext_resource path="res://assets/card_background.png" type="Texture" id=4]
 
+
+
 [node name="Card" type="Control"]
 anchor_right = 0.056
 anchor_bottom = 0.062

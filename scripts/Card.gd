@@ -73,11 +73,37 @@ static func get_type_name(card_type):
 		"K",
 	][card_type-1]
 
+
+static func get_type_value(card_type):
+	return [
+		0,
+		2,
+		3,
+		4,
+		5,
+		6,
+		7,
+		8,
+		9,
+		10,
+		11,
+		12,
+		13,
+	][card_type-1]
+
+
 static func get_sign_color(card_sign):
 	if card_sign in [CardSign.CLUBS, CardSign.SPADES]:
 		return Color(0, 0, 0)
 	else:
 		return Color(0.674509804, 0.196078431, 0.196078431)
+
+
+static func generate_deck():
+	var temp_deck = []
+	for ctype in CardType:
+		for csign in CardSign:
+			temp_deck.append({"type": ctype, "sign": csign})
 
 
 func card_type_set(new_card_type):
