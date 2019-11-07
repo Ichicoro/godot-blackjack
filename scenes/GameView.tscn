@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/Card.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/table_font.tres" type="DynamicFont" id=2]
@@ -13,13 +13,21 @@
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.184314, 0.4, 0.239216, 1 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 0.188235 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0, 0, 0, 0.313726 )
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0, 0, 0, 0.701961 )
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 1
+shadow_offset = Vector2( 2, 2 )
+
+[sub_resource type="GDScript" id=5]
 script/source = "extends Label
 
 
@@ -59,7 +67,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -360.0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -82,7 +90,7 @@ margin_left = 32.0
 margin_top = 180.0
 margin_right = -33.0
 margin_bottom = -116.0
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -173,7 +181,7 @@ margin_left = 32.0
 margin_top = 49.0
 margin_right = -33.0
 margin_bottom = -247.0
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -249,7 +257,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -360.0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -283,6 +291,50 @@ custom_fonts/font = ExtResource( 2 )
 text = "YOUR BET"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RaiseButtonsContainer" type="HBoxContainer" parent="BettingPanel"]
+margin_top = 117.0
+margin_right = 430.0
+margin_bottom = 165.0
+custom_constants/separation = 18
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1btn" type="Button" parent="BettingPanel/RaiseButtonsContainer"]
+margin_left = 89.0
+margin_right = 137.0
+margin_bottom = 48.0
+custom_styles/normal = SubResource( 6 )
+custom_fonts/font = ExtResource( 9 )
+text = "+1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="15btn" type="Button" parent="BettingPanel/RaiseButtonsContainer"]
+margin_left = 155.0
+margin_right = 227.0
+margin_bottom = 48.0
+custom_styles/normal = SubResource( 6 )
+custom_fonts/font = ExtResource( 9 )
+text = "+15"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="100btn" type="Button" parent="BettingPanel/RaiseButtonsContainer"]
+margin_left = 245.0
+margin_right = 341.0
+margin_bottom = 48.0
+custom_styles/normal = SubResource( 6 )
+custom_fonts/font = ExtResource( 9 )
+custom_constants/hseparation = 0
+text = "+100"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -321,7 +373,7 @@ custom_fonts/font = ExtResource( 6 )
 text = "HELLO, I AM A CARD DEALER. I ENJOY REPRESENTING \"THE HOUSE\" IN THE GAME OF BLACKJACK.
 HOW MUCH ARE YOU WILLING TO BET?"
 autowrap = true
-script = SubResource( 3 )
+script = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -340,13 +392,4 @@ __meta__ = {
 [node name="TextTimer" type="Timer" parent="Dealer"]
 wait_time = 0.05
 autostart = true
-
-[node name="Button" type="Button" parent="."]
-margin_left = 166.0
-margin_top = 275.0
-margin_right = 252.0
-margin_bottom = 313.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 [connection signal="timeout" from="Dealer/TextTimer" to="Dealer/DealerText" method="_on_TextTimer_timeout"]

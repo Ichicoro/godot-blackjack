@@ -5,8 +5,6 @@
 [ext_resource path="res://assets/card_icons/clubs.png" type="Texture" id=3]
 [ext_resource path="res://assets/card_background.png" type="Texture" id=4]
 
-
-
 [node name="Card" type="Control"]
 anchor_right = 0.056
 anchor_bottom = 0.062
@@ -16,12 +14,13 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+card_type = 1
 
 [node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 0.112968
-margin_right = -1.90735e-006
+margin_right = -1.90735e-06
 margin_bottom = 0.11297
 texture = ExtResource( 4 )
 __meta__ = {
@@ -45,7 +44,7 @@ margin_right = 11.0
 margin_bottom = 11.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "K"
+text = "A"
 __meta__ = {
 "_edit_use_anchors_": false
 }
