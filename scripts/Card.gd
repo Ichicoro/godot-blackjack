@@ -29,6 +29,7 @@ enum CardType {
 
 export(CardType) var card_type: int setget card_type_set
 export(CardSign) var card_sign: int setget card_sign_set
+export(bool) var flipped: bool setget set_flipped
 
 
 const sign_images = [
@@ -124,4 +125,9 @@ func card_sign_set(new_card_sign):
 	else:
 		$CardSignTexture.rect_position = Vector2(7, 15)
 	$CardTypeLabel.add_color_override("font_color", get_sign_color(self.card_sign))
+
+
+func set_flipped(is_flipped):
+	flipped = is_flipped
+	$CardBack.visible = flipped
 

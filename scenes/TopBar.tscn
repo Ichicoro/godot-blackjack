@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/big_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/buttons/exit_button.png" type="Texture" id=2]
@@ -7,6 +7,19 @@
 bg_color = Color( 0.133333, 0.133333, 0.133333, 1 )
 border_width_bottom = 4
 border_color = Color( 0.184314, 0.184314, 0.184314, 1 )
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends RichTextLabel
+
+const credit_template = \"[right][color=green]$[/color]%s[/right]\"
+
+func _ready():
+	update_credit(UserData.credit)
+	UserData.connect(\"credit_changed\", self, \"update_credit\")
+
+func update_credit(new_credit):
+	self.bbcode_text = credit_template % str(new_credit)
+"
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -34,6 +47,7 @@ custom_fonts/normal_font = ExtResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[right][color=green]$[/color]400[/right]"
 text = "$400"
+script = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

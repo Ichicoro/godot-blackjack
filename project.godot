@@ -24,6 +24,10 @@ config/name="Blackjack"
 run/main_scene="res://scenes/GameView.tscn"
 config/icon="res://assets/dealer_icon.png"
 
+[autoload]
+
+UserData="*res://scripts/UserData.gd"
+
 [display]
 
 window/size/width=430
@@ -62,3 +66,4 @@ texture={
 [rendering]
 
 environment/default_environment="res://default_env.tres"
+quality/driver/driver_name.HTML5="GLES2"
