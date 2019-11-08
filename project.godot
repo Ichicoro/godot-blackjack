@@ -38,6 +38,7 @@ window/stretch/aspect="keep"
 
 [gui]
 
+common/swap_ok_cancel=false
 theme/use_hidpi=true
 
 [importer_defaults]

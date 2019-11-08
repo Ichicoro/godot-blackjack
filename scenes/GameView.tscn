@@ -1,7 +1,7 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
+[ext_resource path="res://scenes/Button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/table_font.tres" type="DynamicFont" id=2]
-[ext_resource path="res://assets/buttons/hit_button.png" type="Texture" id=3]
 [ext_resource path="res://assets/dealer_icon.png" type="Texture" id=4]
 [ext_resource path="res://scenes/TopBar.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/small_table_font.tres" type="DynamicFont" id=6]
@@ -19,7 +19,7 @@ draw_center = false
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0, 0, 0, 0.313726 )
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=4]
 content_margin_left = 8.0
 content_margin_right = 8.0
 bg_color = Color( 0.0470588, 0.109804, 0.0588235, 1 )
@@ -27,7 +27,7 @@ shadow_color = Color( 0, 0, 0, 0.239216 )
 shadow_size = 1
 shadow_offset = Vector2( 3, 3 )
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=5]
 content_margin_left = 4.0
 content_margin_top = 6.0
 bg_color = Color( 0, 0, 0, 0 )
@@ -45,7 +45,7 @@ shadow_size = 1
 shadow_offset = Vector2( 3, 3 )
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=7]
 content_margin_left = 8.0
 content_margin_right = 8.0
 bg_color = Color( 0.0313726, 0.0705882, 0.0392157, 1 )
@@ -54,7 +54,42 @@ shadow_size = 1
 shadow_offset = Vector2( 3, 3 )
 anti_aliasing = false
 
-[sub_resource type="GDScript" id=9]
+[sub_resource type="StyleBoxFlat" id=8]
+content_margin_left = 8.0
+content_margin_right = 8.0
+bg_color = Color( 0.0470588, 0.109804, 0.0588235, 1 )
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 1
+shadow_offset = Vector2( 3, 3 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+content_margin_left = 4.0
+content_margin_top = 6.0
+bg_color = Color( 0, 0, 0, 0 )
+shadow_color = Color( 0.0470588, 0.109804, 0.0588235, 1 )
+shadow_size = 1
+shadow_offset = Vector2( 3, 3 )
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=10]
+content_margin_left = 8.0
+content_margin_right = 8.0
+bg_color = Color( 0.07, 0.07, 0.07, 1 )
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 1
+shadow_offset = Vector2( 3, 3 )
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=11]
+content_margin_left = 8.0
+content_margin_right = 8.0
+bg_color = Color( 0.0313726, 0.0705882, 0.0392157, 1 )
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 1
+shadow_offset = Vector2( 3, 3 )
+anti_aliasing = false
+
+[sub_resource type="GDScript" id=12]
 script/source = "extends Label
 
 
@@ -106,6 +141,20 @@ margin_right = 178.0
 margin_bottom = 182.0
 custom_fonts/font = ExtResource( 2 )
 text = "YOUR HAND"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerHandTotal" type="Label" parent="DealingPanel"]
+margin_left = 189.0
+margin_top = 159.0
+margin_right = 397.0
+margin_bottom = 175.0
+grow_horizontal = 0
+custom_fonts/font = ExtResource( 6 )
+text = "TOTAL = 0"
+align = 2
+valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -182,16 +231,39 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton" type="TextureButton" parent="DealingPanel"]
-margin_left = 300.817
-margin_top = 287.712
-margin_right = 332.817
-margin_bottom = 303.712
-rect_scale = Vector2( 3, 3 )
-texture_normal = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="HitButton" parent="DealingPanel" instance=ExtResource( 1 )]
+margin_left = 299.0
+margin_top = 294.0
+margin_right = 396.0
+margin_bottom = 333.0
+disabled = true
+text = "HIT"
+
+[node name="StandButton" parent="DealingPanel" instance=ExtResource( 1 )]
+margin_left = 175.0
+margin_top = 294.0
+margin_right = 286.0
+margin_bottom = 333.0
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+disabled = true
+text = "STAND"
+
+[node name="EndRoundButton" parent="DealingPanel" instance=ExtResource( 1 )]
+visible = false
+margin_left = 103.0
+margin_top = 294.0
+margin_right = 306.0
+margin_bottom = 333.0
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+text = "END ROUND"
 
 [node name="BettingPanel" type="Panel" parent="."]
 anchor_top = 1.0
@@ -264,11 +336,11 @@ margin_bottom = 313.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0
-custom_styles/hover = SubResource( 7 )
-custom_styles/pressed = SubResource( 8 )
-custom_styles/focus = SubResource( 7 )
-custom_styles/disabled = SubResource( 6 )
-custom_styles/normal = SubResource( 4 )
+custom_styles/hover = SubResource( 8 )
+custom_styles/pressed = SubResource( 9 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 11 )
 custom_fonts/font = ExtResource( 2 )
 disabled = true
 enabled_focus_mode = 0
@@ -311,7 +383,7 @@ custom_fonts/font = ExtResource( 6 )
 text = "HELLO, I AM A CARD DEALER. I ENJOY REPRESENTING \"THE HOUSE\" IN THE GAME OF BLACKJACK.
 HOW MUCH ARE YOU WILLING TO BET?"
 autowrap = true
-script = SubResource( 9 )
+script = SubResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -328,7 +400,10 @@ __meta__ = {
 }
 
 [node name="TextTimer" type="Timer" parent="Dealer"]
-wait_time = 0.05
+wait_time = 0.03
 autostart = true
+[connection signal="pressed" from="DealingPanel/HitButton" to="." method="_on_HitButton_pressed"]
+[connection signal="pressed" from="DealingPanel/StandButton" to="." method="_on_StandButton_pressed"]
+[connection signal="pressed" from="DealingPanel/EndRoundButton" to="." method="_on_EndRoundButton_pressed"]
 [connection signal="pressed" from="BettingPanel/PlaceBetButton" to="." method="_on_PlaceBetButton_pressed"]
 [connection signal="timeout" from="Dealer/TextTimer" to="Dealer/DealerText" method="_on_TextTimer_timeout"]

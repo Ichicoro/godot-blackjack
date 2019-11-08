@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/big_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/buttons/exit_button.png" type="Texture" id=2]
@@ -19,6 +19,30 @@ func _ready():
 
 func update_credit(new_credit):
 	self.bbcode_text = credit_template % str(new_credit)
+"
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends TextureButton
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+func _on_TextureButton_pressed():
+	pass
+
+
+func _on_TextureButton_button_down():
+	self.modulate = Color(1,1,1,0.7)
+
+
+func _on_TextureButton_button_up():
+	self.modulate = Color(1,1,1,1)
 "
 
 [node name="Control" type="Control"]
@@ -59,6 +83,10 @@ margin_right = 22.0
 margin_bottom = 22.0
 rect_scale = Vector2( 2, 2 )
 texture_normal = ExtResource( 2 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="button_down" from="Panel/TextureButton" to="Panel/TextureButton" method="_on_TextureButton_button_down"]
+[connection signal="button_up" from="Panel/TextureButton" to="Panel/TextureButton" method="_on_TextureButton_button_up"]
+[connection signal="pressed" from="Panel/TextureButton" to="Panel/TextureButton" method="_on_TextureButton_pressed"]

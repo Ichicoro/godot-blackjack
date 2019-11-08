@@ -22,9 +22,13 @@ var round_state: int = RoundState.BETTING setget set_round_state
 
 var player_bet: int = 0 setget set_player_bet 
 
+onready var dealer_label = $Dealer/DealerText
+
 onready var player_hand_container = $DealingPanel/PlayerHandPanel/GridContainer
 onready var dealer_hand_container = $DealingPanel/DealerHandPanel/GridContainer
 onready var ingame_bet_label = $DealingPanel/IngameBetLabel
+onready var hit_button = $DealingPanel/HitButton
+onready var stand_button = $DealingPanel/StandButton
 
 onready var raise_buttons_container = $BettingPanel/RaiseButtonsContainer
 onready var lower_buttons_container = $BettingPanel/LowerButtonsContainer
@@ -66,7 +70,6 @@ func get_hand_value(whose: int):
 	var aces = 0
 	var total = 0
 	for card in hand:
-		print(card.card_type)					# TODO: DELETE THIS STUFF
 		if card.card_type == Card.CardType.ACE:
 			aces += 1
 		else:
@@ -78,22 +81,32 @@ func get_hand_value(whose: int):
 		total += aces
 	else:
 		total += aces*11
-	
-	print("total points: ", total)   			# TODO: DELETE THIS STUFF
-
+	return total
 
 func set_player_bet(value):
 	if value < 0: return
 	player_bet = value
 	ingame_bet_label.text = "YOUR BET: $%s" % str(value)
 	betting_panel_bet_amount_label.text = "$%s" % value
-	print(ingame_bet_label.text)
+	#print(ingame_bet_label.text)
 
 
 func set_round_state(state):
 	round_state = state
 	if round_state == RoundState.IDLE:
-		pass
+		hit_button.disabled = false
+		stand_button.disabled = false
+	else:
+		hit_button.disabled = true
+		stand_button.disabled = true
+	if round_state == RoundState.ENDED:
+		hit_button.hide()
+		stand_button.hide()
+		$DealingPanel/EndRoundButton.show()
+	else:
+		hit_button.show()
+		stand_button.show()
+		$DealingPanel/EndRoundButton.hide()
 
 
 func deal_card(which, to_who: int, flipped = false):
@@ -101,6 +114,7 @@ func deal_card(which, to_who: int, flipped = false):
 	var card = CardScene.instance().init(Card.CardSign[which.card_sign], Card.CardType[which.card_type])
 	card.flipped = flipped
 	hand_container.add_child(card)
+	$DealingPanel/PlayerHandTotal.text = "TOTAL = %d" % get_hand_value(Hand.PLAYER)
 
 
 func handle_bet_button(amount):
@@ -114,12 +128,41 @@ func update_button_states():
 	for button in raise_buttons_container.get_children():
 		button.disabled = (int(button.text)+player_bet > UserData.credit)
 	for button in lower_buttons_container.get_children():
-		button.disabled = (UserData.credit - (player_bet+int(button.text)) < 0)
+		button.disabled = (player_bet + int(button.text)) < 0
 
 
 func _on_PlaceBetButton_pressed():
 	UserData.credit -= player_bet
 	start_round()
+
+
+func check_cards():
+	if round_state == RoundState.DEALING_TO_PLAYER:
+		var hand_value = get_hand_value(Hand.PLAYER)
+		if hand_value > 21:
+			set_round_state(RoundState.ENDED)
+			dealer_label.set_text("Too bad! You've gone over.")
+		elif hand_value == 21:
+			dealer_label.set_text("Nice! A blackjack!")
+			UserData.credit += player_bet*2
+			set_round_state(RoundState.ENDED)
+		else:
+			set_round_state(RoundState.IDLE)
+	elif round_state == RoundState.DEALING_TO_DEALER:
+		set_round_state(RoundState.ENDED)
+		var hand_value = get_hand_value(Hand.DEALER)
+		if hand_value > 21:
+			dealer_label.set_text("Aw, too bad. I busted...")
+		else:
+			if get_hand_value(Hand.PLAYER) > hand_value:
+				dealer_label.set_text("Nice job! You've won $%d" % player_bet)
+				UserData.credit += player_bet*2
+			elif get_hand_value(Hand.PLAYER) == hand_value:
+				dealer_label.set_text("And.. it's a DRAW!")
+				UserData.credit += player_bet
+			else:
+				dealer_label.set_text("You've lost! I AM ZE BEST :>")
+	return round_state == RoundState.ENDED
 
 
 func start_round():
@@ -130,12 +173,72 @@ func start_round():
 	
 	# Deal cards
 	deal_card(deck.pop_front(), Hand.PLAYER)
+#	deal_card({"card_type": 2, "card_sign": 2}, Hand.PLAYER)
 	yield(get_tree().create_timer(0.5), "timeout")
 	deal_card(deck.pop_front(), Hand.PLAYER)
+#	deal_card({"card_type": 2, "card_sign": 1}, Hand.PLAYER)
 	yield(get_tree().create_timer(0.5), "timeout")
 	deal_card(deck.pop_front(), Hand.DEALER)
 	yield(get_tree().create_timer(0.5), "timeout")
 	deal_card(deck.pop_front(), Hand.DEALER, true)
 	
+	var hand_value = get_hand_value(Hand.PLAYER)
+	$DealingPanel/PlayerHandTotal.text = "TOTAL = %d" % hand_value
+	
 	# Wait for the player
 	set_round_state(RoundState.IDLE)
+
+
+
+func reset_state():
+	# Setup deck
+	deck = Card.generate_deck()
+	
+	# Set round state
+	set_round_state(RoundState.BETTING)
+	
+	dealer_label.set_text("Wanna play again? Place a bet.")
+	
+	# Reset bets and stuff
+	set_player_bet(0)
+	update_button_states()
+	
+	$DealingPanel/PlayerHandTotal.text = "TOTAL = %d" % 0
+	
+	for card in player_hand_container.get_children():
+		card.queue_free()
+	for card in dealer_hand_container.get_children():
+		card.queue_free()
+	
+	$DealingPanel.hide()
+	$BettingPanel.show()
+
+
+
+### DEALING PANEL HANDLERS ###
+
+func _on_HitButton_pressed():
+	set_round_state(RoundState.DEALING_TO_PLAYER)
+	yield(get_tree().create_timer(0.3), "timeout")
+	deal_card(deck.pop_front(), Hand.PLAYER)
+	yield(get_tree().create_timer(0.3), "timeout")
+	dealer_label.set_text("Dealt " + player_hand_container.get_children()[-1].get_card_name())
+	check_cards()
+
+
+func _on_StandButton_pressed():
+	if check_cards(): return							### FIXME
+	yield(get_tree().create_timer(0.3), "timeout")
+	dealer_hand_container.get_children()[1].flipped = false
+	
+	set_round_state(RoundState.DEALING_TO_DEALER)
+	while (get_hand_value(Hand.DEALER) < 15) or (get_hand_value(Hand.DEALER) < get_hand_value(Hand.PLAYER)):
+		yield(get_tree().create_timer(0.75), "timeout")
+		deal_card(deck.pop_front(), Hand.DEALER)
+	
+	yield(get_tree().create_timer(0.3), "timeout")
+	check_cards()
+
+
+func _on_EndRoundButton_pressed():
+	reset_state()

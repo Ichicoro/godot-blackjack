@@ -131,3 +131,7 @@ func set_flipped(is_flipped):
 	flipped = is_flipped
 	$CardBack.visible = flipped
 
+
+func get_card_name():
+	return CardType.keys()[card_type-1] + " of " + CardSign.keys()[card_sign]
+
