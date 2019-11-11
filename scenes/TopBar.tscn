@@ -1,14 +1,38 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/big_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/buttons/exit_button.png" type="Texture" id=2]
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+tool
+
+signal quit_pressed
+
+export var exit_button_enabled: bool = true setget set_exit_button_enabled
+
+func _ready():
+	pass
+
+
+func set_exit_button_enabled(value):
+	exit_button_enabled = value
+	if exit_button_enabled:
+		$Panel/TextureButton.show()
+	else:
+		$Panel/TextureButton.hide()
+
+
+func _on_Exit_pressed():
+	emit_signal(\"quit_pressed\")
+"
+
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.133333, 0.133333, 0.133333, 1 )
 border_width_bottom = 4
 border_color = Color( 0.184314, 0.184314, 0.184314, 1 )
 
-[sub_resource type="GDScript" id=2]
+[sub_resource type="GDScript" id=3]
 script/source = "extends RichTextLabel
 
 const credit_template = \"[right][color=green]$[/color]%s[/right]\"
@@ -21,7 +45,7 @@ func update_credit(new_credit):
 	self.bbcode_text = credit_template % str(new_credit)
 "
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id=4]
 script/source = "extends TextureButton
 
 # Declare member variables here. Examples:
@@ -49,6 +73,7 @@ func _on_TextureButton_button_up():
 anchor_right = 1.0
 anchor_bottom = 0.092
 margin_bottom = -0.104004
+script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -56,7 +81,7 @@ __meta__ = {
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
 margin_bottom = 47.0
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -71,7 +96,7 @@ custom_fonts/normal_font = ExtResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[right][color=green]$[/color]400[/right]"
 text = "$400"
-script = SubResource( 2 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -83,10 +108,11 @@ margin_right = 22.0
 margin_bottom = 22.0
 rect_scale = Vector2( 2, 2 )
 texture_normal = ExtResource( 2 )
-script = SubResource( 3 )
+script = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="button_down" from="Panel/TextureButton" to="Panel/TextureButton" method="_on_TextureButton_button_down"]
 [connection signal="button_up" from="Panel/TextureButton" to="Panel/TextureButton" method="_on_TextureButton_button_up"]
 [connection signal="pressed" from="Panel/TextureButton" to="Panel/TextureButton" method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="Panel/TextureButton" to="." method="_on_Exit_pressed"]

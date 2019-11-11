@@ -2,6 +2,7 @@
 
 [ext_resource path="res://scenes/Button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/table_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scenes/BackgroundPanel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/dealer_icon.png" type="Texture" id=4]
 [ext_resource path="res://scenes/TopBar.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/small_table_font.tres" type="DynamicFont" id=6]
@@ -10,16 +11,13 @@
 [ext_resource path="res://assets/big_font.tres" type="DynamicFont" id=9]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.184314, 0.4, 0.239216, 1 )
-
-[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 0.188235 )
 draw_center = false
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 0.313726 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=3]
 content_margin_left = 8.0
 content_margin_right = 8.0
 bg_color = Color( 0.0470588, 0.109804, 0.0588235, 1 )
@@ -27,7 +25,7 @@ shadow_color = Color( 0, 0, 0, 0.239216 )
 shadow_size = 1
 shadow_offset = Vector2( 3, 3 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=4]
 content_margin_left = 4.0
 content_margin_top = 6.0
 bg_color = Color( 0, 0, 0, 0 )
@@ -36,10 +34,19 @@ shadow_size = 1
 shadow_offset = Vector2( 3, 3 )
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=5]
 content_margin_left = 8.0
 content_margin_right = 8.0
 bg_color = Color( 0.07, 0.07, 0.07, 1 )
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 1
+shadow_offset = Vector2( 3, 3 )
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=6]
+content_margin_left = 8.0
+content_margin_right = 8.0
+bg_color = Color( 0.0313726, 0.0705882, 0.0392157, 1 )
 shadow_color = Color( 0, 0, 0, 0.239216 )
 shadow_size = 1
 shadow_offset = Vector2( 3, 3 )
@@ -48,21 +55,12 @@ anti_aliasing = false
 [sub_resource type="StyleBoxFlat" id=7]
 content_margin_left = 8.0
 content_margin_right = 8.0
-bg_color = Color( 0.0313726, 0.0705882, 0.0392157, 1 )
-shadow_color = Color( 0, 0, 0, 0.239216 )
-shadow_size = 1
-shadow_offset = Vector2( 3, 3 )
-anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id=8]
-content_margin_left = 8.0
-content_margin_right = 8.0
 bg_color = Color( 0.0470588, 0.109804, 0.0588235, 1 )
 shadow_color = Color( 0, 0, 0, 0.239216 )
 shadow_size = 1
 shadow_offset = Vector2( 3, 3 )
 
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxFlat" id=8]
 content_margin_left = 4.0
 content_margin_top = 6.0
 bg_color = Color( 0, 0, 0, 0 )
@@ -71,7 +69,7 @@ shadow_size = 1
 shadow_offset = Vector2( 3, 3 )
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=9]
 content_margin_left = 8.0
 content_margin_right = 8.0
 bg_color = Color( 0.07, 0.07, 0.07, 1 )
@@ -80,7 +78,7 @@ shadow_size = 1
 shadow_offset = Vector2( 3, 3 )
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=11]
+[sub_resource type="StyleBoxFlat" id=10]
 content_margin_left = 8.0
 content_margin_right = 8.0
 bg_color = Color( 0.0313726, 0.0705882, 0.0392157, 1 )
@@ -89,7 +87,7 @@ shadow_size = 1
 shadow_offset = Vector2( 3, 3 )
 anti_aliasing = false
 
-[sub_resource type="GDScript" id=12]
+[sub_resource type="GDScript" id=11]
 script/source = "extends Label
 
 
@@ -113,32 +111,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" parent="." instance=ExtResource( 3 )]
+
+[node name="DealingPanel" type="Panel" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 0.263489
-margin_bottom = 0.263489
+margin_top = 152.0
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DealingPanel" type="Panel" parent="."]
-visible = false
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -360.0
-custom_styles/panel = SubResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="HandLabel" type="Label" parent="DealingPanel"]
-margin_left = 34.0
-margin_top = 160.0
-margin_right = 178.0
-margin_bottom = 182.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -181.0
+margin_top = -20.0
+margin_right = -37.0
+margin_bottom = 2.0
 custom_fonts/font = ExtResource( 2 )
 text = "YOUR HAND"
 __meta__ = {
@@ -146,10 +139,14 @@ __meta__ = {
 }
 
 [node name="PlayerHandTotal" type="Label" parent="DealingPanel"]
-margin_left = 189.0
-margin_top = 159.0
-margin_right = 397.0
-margin_bottom = 175.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -26.0
+margin_top = -21.0
+margin_right = 182.0
+margin_bottom = -5.0
 grow_horizontal = 0
 custom_fonts/font = ExtResource( 6 )
 text = "TOTAL = 0"
@@ -160,13 +157,14 @@ __meta__ = {
 }
 
 [node name="PlayerHandPanel" type="Panel" parent="DealingPanel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 32.0
-margin_top = 180.0
-margin_right = -33.0
-margin_bottom = -116.0
-custom_styles/panel = SubResource( 3 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -183.0
+margin_right = 182.0
+margin_bottom = 64.0
+custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -184,10 +182,14 @@ __meta__ = {
 }
 
 [node name="DealerLabel" type="Label" parent="DealingPanel"]
-margin_left = 34.0
-margin_top = 29.0
-margin_right = 242.0
-margin_bottom = 51.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -181.0
+margin_top = -151.0
+margin_right = 27.0
+margin_bottom = -129.0
 custom_fonts/font = ExtResource( 2 )
 text = "DEALER'S HAND"
 __meta__ = {
@@ -195,10 +197,14 @@ __meta__ = {
 }
 
 [node name="IngameBetLabel" type="Label" parent="DealingPanel"]
-margin_left = 191.0
-margin_top = 259.0
-margin_right = 399.0
-margin_bottom = 275.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -24.0
+margin_top = 79.0
+margin_right = 184.0
+margin_bottom = 95.0
 grow_horizontal = 0
 custom_fonts/font = ExtResource( 2 )
 text = "YOUR BET: $0"
@@ -207,14 +213,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="DealerHandTotal" type="Label" parent="DealingPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -26.0
+margin_top = -152.0
+margin_right = 182.0
+margin_bottom = -136.0
+grow_horizontal = 0
+custom_fonts/font = ExtResource( 6 )
+text = "TOTAL = 0"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="DealerHandPanel" type="Panel" parent="DealingPanel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 32.0
-margin_top = 49.0
-margin_right = -33.0
-margin_bottom = -247.0
-custom_styles/panel = SubResource( 3 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -183.0
+margin_top = -131.0
+margin_right = 182.0
+margin_bottom = -67.0
+custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -232,58 +258,68 @@ __meta__ = {
 }
 
 [node name="HitButton" parent="DealingPanel" instance=ExtResource( 1 )]
-margin_left = 299.0
-margin_top = 294.0
-margin_right = 396.0
-margin_bottom = 333.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -131.0
+margin_top = -66.0
+margin_right = -34.0
+margin_bottom = -27.0
 disabled = true
 text = "HIT"
 
 [node name="StandButton" parent="DealingPanel" instance=ExtResource( 1 )]
-margin_left = 175.0
-margin_top = 294.0
-margin_right = 286.0
-margin_bottom = 333.0
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 6 )
-custom_styles/normal = SubResource( 7 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -255.0
+margin_top = -66.0
+margin_right = -144.0
+margin_bottom = -27.0
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
 disabled = true
 text = "STAND"
 
 [node name="EndRoundButton" parent="DealingPanel" instance=ExtResource( 1 )]
 visible = false
-margin_left = 103.0
-margin_top = 294.0
-margin_right = 306.0
-margin_bottom = 333.0
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 6 )
-custom_styles/normal = SubResource( 7 )
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -112.0
+margin_top = -66.0
+margin_right = 91.0
+margin_bottom = -27.0
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
 text = "END ROUND"
 
 [node name="BettingPanel" type="Panel" parent="."]
-anchor_top = 1.0
+anchor_top = 0.001
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -360.0
-custom_styles/panel = SubResource( 2 )
+margin_top = 151.488
+custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="BetAmount" type="Label" parent="BettingPanel"]
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
 margin_left = -61.0
-margin_top = -117.0
+margin_top = 63.0
 margin_right = 61.0
-margin_bottom = -57.0
+margin_bottom = 123.0
 grow_horizontal = 2
 grow_vertical = 2
 custom_fonts/font = ExtResource( 9 )
@@ -295,9 +331,11 @@ __meta__ = {
 }
 
 [node name="Label2" type="Label" parent="BettingPanel"]
-margin_left = 146.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -69.0
 margin_top = 48.0
-margin_right = 274.0
+margin_right = 59.0
 margin_bottom = 77.0
 rect_pivot_offset = Vector2( 64, 14.5 )
 custom_fonts/font = ExtResource( 2 )
@@ -309,9 +347,14 @@ __meta__ = {
 }
 
 [node name="RaiseButtonsContainer" type="HBoxContainer" parent="BettingPanel"]
-margin_top = 117.0
-margin_right = 430.0
-margin_bottom = 165.0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -215.0
+margin_top = -243.0
+margin_right = 215.0
+margin_bottom = -195.0
 custom_constants/separation = 18
 alignment = 1
 __meta__ = {
@@ -319,9 +362,14 @@ __meta__ = {
 }
 
 [node name="LowerButtonsContainer" type="HBoxContainer" parent="BettingPanel"]
-margin_top = 179.0
-margin_right = 430.0
-margin_bottom = 227.0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -215.0
+margin_top = -181.0
+margin_right = 215.0
+margin_bottom = -133.0
 custom_constants/separation = 18
 alignment = 1
 __meta__ = {
@@ -329,18 +377,22 @@ __meta__ = {
 }
 
 [node name="PlaceBetButton" type="Button" parent="BettingPanel"]
-margin_left = 113.0
-margin_top = 265.0
-margin_right = 315.0
-margin_bottom = 313.0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -102.0
+margin_top = -95.0
+margin_right = 100.0
+margin_bottom = -47.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0
-custom_styles/hover = SubResource( 8 )
-custom_styles/pressed = SubResource( 9 )
-custom_styles/focus = SubResource( 8 )
-custom_styles/disabled = SubResource( 10 )
-custom_styles/normal = SubResource( 11 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 custom_fonts/font = ExtResource( 2 )
 disabled = true
 enabled_focus_mode = 0
@@ -350,11 +402,14 @@ __meta__ = {
 }
 
 [node name="TopBar" parent="." instance=ExtResource( 5 )]
+exit_button_enabled = true
 
 [node name="Dealer" type="Control" parent="."]
-margin_left = 34.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -181.0
 margin_top = 69.0
-margin_right = 402.0
+margin_right = 187.0
 margin_bottom = 133.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -383,7 +438,7 @@ custom_fonts/font = ExtResource( 6 )
 text = "HELLO, I AM A CARD DEALER. I ENJOY REPRESENTING \"THE HOUSE\" IN THE GAME OF BLACKJACK.
 HOW MUCH ARE YOU WILLING TO BET?"
 autowrap = true
-script = SubResource( 12 )
+script = SubResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -406,4 +461,5 @@ autostart = true
 [connection signal="pressed" from="DealingPanel/StandButton" to="." method="_on_StandButton_pressed"]
 [connection signal="pressed" from="DealingPanel/EndRoundButton" to="." method="_on_EndRoundButton_pressed"]
 [connection signal="pressed" from="BettingPanel/PlaceBetButton" to="." method="_on_PlaceBetButton_pressed"]
+[connection signal="quit_pressed" from="TopBar" to="." method="_on_TopBar_quit_pressed"]
 [connection signal="timeout" from="Dealer/TextTimer" to="Dealer/DealerText" method="_on_TextTimer_timeout"]
