@@ -22,7 +22,6 @@ _global_script_class_icons={
 
 config/name="Blackjack"
 run/main_scene="res://scenes/MainMenu.tscn"
-run/low_processor_mode=true
 boot_splash/image="res://splash.png"
 boot_splash/use_filter=false
 boot_splash/bg_color=Color( 0.184314, 0.4, 0.239216, 1 )
@@ -37,6 +36,7 @@ UserData="*res://scripts/UserData.gd"
 
 window/size/width=430
 window/size/height=512
+window/dpi/allow_hidpi=true
 window/handheld/orientation="portrait"
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"
@@ -74,5 +74,7 @@ texture={
 
 [rendering]
 
+quality/intended_usage/framebuffer_allocation=0
+quality/intended_usage/framebuffer_allocation.mobile=0
 quality/driver/driver_name.HTML5="GLES2"
-quality/driver/driver_name.Android="GLES2"
+quality/driver/driver_name.Android="GLES3"

@@ -52,6 +52,15 @@ func _ready():
 	emit_signal("ready")
 
 
+func _gui_input(event):
+	return
+	if event is InputEventMouseButton:
+		if event.pressed:
+			self.modulate = Color(0.8,0.8,0.8,1)
+		else:
+			self.modulate = Color(1,1,1,1)
+
+
 static func get_sign_icon(card_sign):
 	return sign_images[card_sign]
 

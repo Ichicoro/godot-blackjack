@@ -114,10 +114,9 @@ __meta__ = {
 [node name="Panel" parent="." instance=ExtResource( 3 )]
 
 [node name="DealingPanel" type="Panel" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 152.0
+margin_top = 47.0
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -129,9 +128,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -181.0
-margin_top = -20.0
+margin_top = -11.0
 margin_right = -37.0
-margin_bottom = 2.0
+margin_bottom = 11.0
 custom_fonts/font = ExtResource( 2 )
 text = "YOUR HAND"
 __meta__ = {
@@ -144,9 +143,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -26.0
-margin_top = -21.0
+margin_top = -12.0
 margin_right = 182.0
-margin_bottom = -5.0
+margin_bottom = 4.0
 grow_horizontal = 0
 custom_fonts/font = ExtResource( 6 )
 text = "TOTAL = 0"
@@ -162,19 +161,18 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -183.0
+margin_top = 9.5
 margin_right = 182.0
-margin_bottom = 64.0
+margin_bottom = 105.5
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="GridContainer" type="GridContainer" parent="DealingPanel/PlayerHandPanel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -183.0
-margin_bottom = -32.0
-rect_scale = Vector2( 2, 2 )
+margin_right = 122.0
+margin_bottom = 32.0
+rect_scale = Vector2( 3, 3 )
 custom_constants/hseparation = 16
 columns = 11
 __meta__ = {
@@ -187,9 +185,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -181.0
-margin_top = -151.0
+margin_top = -184.0
 margin_right = 27.0
-margin_bottom = -129.0
+margin_bottom = -162.0
 custom_fonts/font = ExtResource( 2 )
 text = "DEALER'S HAND"
 __meta__ = {
@@ -202,9 +200,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -24.0
-margin_top = 79.0
+margin_top = 125.0
 margin_right = 184.0
-margin_bottom = 95.0
+margin_bottom = 141.0
 grow_horizontal = 0
 custom_fonts/font = ExtResource( 2 )
 text = "YOUR BET: $0"
@@ -219,9 +217,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -26.0
-margin_top = -152.0
+margin_top = -185.0
 margin_right = 182.0
-margin_bottom = -136.0
+margin_bottom = -169.0
 grow_horizontal = 0
 custom_fonts/font = ExtResource( 6 )
 text = "TOTAL = 0"
@@ -237,20 +235,18 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -183.0
-margin_top = -131.0
+margin_top = -164.0
 margin_right = 182.0
-margin_bottom = -67.0
+margin_bottom = -68.0
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="GridContainer" type="GridContainer" parent="DealingPanel/DealerHandPanel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -183.0
-margin_bottom = -32.0
-rect_scale = Vector2( 2, 2 )
+margin_right = 122.0
+margin_bottom = 32.0
+rect_scale = Vector2( 3, 3 )
 custom_constants/hseparation = 16
 columns = 11
 __meta__ = {
@@ -266,6 +262,8 @@ margin_left = -131.0
 margin_top = -66.0
 margin_right = -34.0
 margin_bottom = -27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 disabled = true
 text = "HIT"
 
@@ -278,6 +276,8 @@ margin_left = -255.0
 margin_top = -66.0
 margin_right = -144.0
 margin_bottom = -27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/focus = SubResource( 3 )
@@ -304,10 +304,11 @@ custom_styles/normal = SubResource( 6 )
 text = "END ROUND"
 
 [node name="BettingPanel" type="Panel" parent="."]
+visible = false
 anchor_top = 0.001
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 151.488
+margin_top = 46.488
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -402,9 +403,9 @@ __meta__ = {
 }
 
 [node name="TopBar" parent="." instance=ExtResource( 5 )]
-exit_button_enabled = true
 
 [node name="Dealer" type="Control" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -181.0
