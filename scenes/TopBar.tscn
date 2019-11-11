@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/big_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/buttons/exit_button.png" type="Texture" id=2]
+[ext_resource path="res://assets/table_font.tres" type="DynamicFont" id=3]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
@@ -10,6 +11,7 @@ tool
 signal quit_pressed
 
 export var exit_button_enabled: bool = true setget set_exit_button_enabled
+export var clock_enabled: bool = true setget set_clock_enabled
 
 func _ready():
 	pass
@@ -21,6 +23,14 @@ func set_exit_button_enabled(value):
 		$Panel/TextureButton.show()
 	else:
 		$Panel/TextureButton.hide()
+
+
+func set_clock_enabled(value):
+	clock_enabled = value
+	if clock_enabled:
+		$Panel/ClockLabel.show()
+	else:
+		$Panel/ClockLabel.hide()
 
 
 func _on_Exit_pressed():
@@ -69,6 +79,19 @@ func _on_TextureButton_button_up():
 	self.modulate = Color(1,1,1,1)
 "
 
+[sub_resource type="GDScript" id=5]
+script/source = "extends Label
+tool
+
+func _ready():
+	var time = OS.get_time()
+	self.text = \"%d:%d\" % [time.hour, time.minute]
+
+func _process(delta):
+	var time = OS.get_time()
+	self.text = \"%d:%d\" % [time.hour, time.minute]
+"
+
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 0.092
@@ -112,7 +135,27 @@ script = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ClockLabel" type="Label" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -40.0
+margin_top = -12.5
+margin_right = 40.0
+margin_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 3 )
+text = "0:37"
+align = 1
+valign = 1
+script = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="button_down" from="Panel/TextureButton" to="Panel/TextureButton" method="_on_TextureButton_button_down"]
 [connection signal="button_up" from="Panel/TextureButton" to="Panel/TextureButton" method="_on_TextureButton_button_up"]
-[connection signal="pressed" from="Panel/TextureButton" to="Panel/TextureButton" method="_on_TextureButton_pressed"]
 [connection signal="pressed" from="Panel/TextureButton" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="Panel/TextureButton" to="Panel/TextureButton" method="_on_TextureButton_pressed"]

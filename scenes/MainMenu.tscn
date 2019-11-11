@@ -40,14 +40,8 @@ margin_top = 0.0
 margin_bottom = 0.0
 
 [node name="Cards" type="Control" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -215.0
-margin_top = -256.0
-margin_right = 215.0
-margin_bottom = 256.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -71,29 +65,41 @@ card_type = 13
 card_sign = 3
 
 [node name="Card4" parent="Cards" instance=ExtResource( 5 )]
-margin_left = 6.0
-margin_top = 417.912
-margin_right = 5.92
-margin_bottom = 418.168
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -162.0
+margin_top = -25.088
+margin_right = -138.0
+margin_bottom = 6.91199
 rect_rotation = -44.9999
 rect_scale = Vector2( 3, 3 )
 card_type = 10
 card_sign = 1
 
 [node name="Card3" parent="Cards" instance=ExtResource( 5 )]
-margin_left = 58.0
-margin_top = 368.0
-margin_right = 57.92
-margin_bottom = 368.256
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -110.0
+margin_top = -74.9999
+margin_right = -86.0
+margin_bottom = -42.9999
 rect_rotation = -15.0
 rect_scale = Vector2( 3, 3 )
 card_type = 2
 
 [node name="Card5" parent="Cards" instance=ExtResource( 5 )]
-margin_left = 130.0
-margin_top = 352.0
-margin_right = 129.92
-margin_bottom = 352.256
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -38.0
+margin_top = -90.9999
+margin_right = -14.0
+margin_bottom = -58.9999
 rect_rotation = 15.0
 rect_scale = Vector2( 3, 3 )
 card_type = 5
