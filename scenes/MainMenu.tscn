@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/BackgroundPanel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/TopBar.tscn" type="PackedScene" id=2]
@@ -26,6 +26,17 @@ func _ready():
 func _pressed():
 	yield(get_tree().create_timer(0.3), \"timeout\")
 	get_tree().change_scene(\"res://scenes/OptionsView.tscn\")
+"
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Button
+
+func _ready():
+	pass
+
+func _pressed():
+	yield(get_tree().create_timer(0.3), \"timeout\")
+	get_tree().change_scene(\"res://scenes/StoreView.tscn\")
 "
 
 [node name="Control" type="Control"]
@@ -109,6 +120,7 @@ card_sign = 3
 anchor_bottom = 0.0
 margin_bottom = 47.0
 exit_button_enabled = false
+clock_enabled = true
 
 [node name="PlayButton" parent="." instance=ExtResource( 4 )]
 anchor_left = 0.5
@@ -133,6 +145,18 @@ margin_right = 100.5
 margin_bottom = 80.5
 text = "OPTIONS"
 script = SubResource( 2 )
+
+[node name="PlayButton3" parent="." instance=ExtResource( 4 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.5
+margin_top = 102.5
+margin_right = 100.5
+margin_bottom = 150.5
+text = "SHOP"
+script = SubResource( 3 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 anchor_left = 0.5

@@ -1,31 +1,20 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/TopBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/BackgroundPanel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/big_font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://scenes/Button.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/Tickbox.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/table_font.tres" type="DynamicFont" id=7]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
 
 func _ready():
-	$MusicToggleButton.pressed = UserData.music_enabled
-	$SoundsToggleButton.pressed = UserData.sounds_enabled
+	pass
 
 
 func _on_TopBar_quit_pressed():
 	yield(get_tree().create_timer(0.3), \"timeout\")
 	get_tree().change_scene(\"res://scenes/MainMenu.tscn\")
-
-
-func _on_MusicToggleButton_toggled(button_pressed):
-	UserData.music_enabled = button_pressed
-
-
-func _on_SoundsToggleButton_toggled(button_pressed):
-	UserData.sounds_enabled = button_pressed
 "
 
 [sub_resource type="StyleBoxEmpty" id=2]
@@ -57,9 +46,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 47.0
 custom_styles/panel = SubResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="Panel2"]
 anchor_left = 0.5
@@ -69,7 +55,7 @@ margin_top = 55.0
 margin_right = 83.0
 margin_bottom = 80.0
 custom_fonts/font = ExtResource( 3 )
-text = "OPTIONS"
+text = "STORE"
 align = 1
 valign = 1
 __meta__ = {
@@ -82,42 +68,6 @@ margin_left = 112.0
 margin_top = 161.0
 margin_right = -112.0
 margin_bottom = 207.0
-text = "GIMME $1000"
+text = "BUY $1000"
 script = SubResource( 3 )
-
-[node name="MusicToggleButton" parent="." instance=ExtResource( 5 )]
-margin_top = 230.0
-margin_bottom = 267.0
-
-[node name="SoundsToggleButton" parent="." instance=ExtResource( 5 )]
-
-[node name="Label2" type="Label" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -103.0
-margin_top = 236.428
-margin_right = 65.0
-margin_bottom = 261.428
-custom_fonts/font = ExtResource( 7 )
-text = "MUSIC"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label3" type="Label" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -103.0
-margin_top = 281.428
-margin_right = 65.0
-margin_bottom = 306.428
-custom_fonts/font = ExtResource( 7 )
-text = "SOUNDS"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 [connection signal="quit_pressed" from="TopBar" to="." method="_on_TopBar_quit_pressed"]
-[connection signal="toggled" from="MusicToggleButton" to="." method="_on_MusicToggleButton_toggled"]
-[connection signal="toggled" from="SoundsToggleButton" to="." method="_on_SoundsToggleButton_toggled"]
