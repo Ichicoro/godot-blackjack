@@ -49,8 +49,6 @@ __meta__ = {
 rect_pivot_offset = Vector2( 0, -0.263489 )
 
 [node name="TopBar" parent="." instance=ExtResource( 1 )]
-exit_button_enabled = true
-clock_enabled = true
 
 [node name="Panel2" type="Panel" parent="."]
 anchor_right = 1.0

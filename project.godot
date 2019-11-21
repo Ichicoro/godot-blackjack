@@ -31,6 +31,7 @@ run/low_processor_mode.mobile=false
 [autoload]
 
 UserData="*res://scripts/UserData.gd"
+Alert="*res://scripts/Alert.gd"
 
 [display]
 
@@ -76,5 +77,8 @@ texture={
 
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
+quality/subsurface_scattering/quality=0
+quality/depth/hdr=false
 quality/driver/driver_name.HTML5="GLES2"
 quality/driver/driver_name.Android="GLES3"
+quality/driver/driver_name.iOS="GLES3"

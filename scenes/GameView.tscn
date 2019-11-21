@@ -20,7 +20,7 @@ bg_color = Color( 0, 0, 0, 0.313726 )
 [sub_resource type="StyleBoxFlat" id=3]
 content_margin_left = 8.0
 content_margin_right = 8.0
-bg_color = Color( 0.0470588, 0.109804, 0.0588235, 1 )
+bg_color = Color( 0.11, 0.11, 0.11, 1 )
 shadow_color = Color( 0, 0, 0, 0.239216 )
 shadow_size = 1
 shadow_offset = Vector2( 3, 3 )
@@ -29,7 +29,7 @@ shadow_offset = Vector2( 3, 3 )
 content_margin_left = 4.0
 content_margin_top = 6.0
 bg_color = Color( 0, 0, 0, 0 )
-shadow_color = Color( 0.0470588, 0.109804, 0.0588235, 1 )
+shadow_color = Color( 0.11, 0.11, 0.11, 1 )
 shadow_size = 1
 shadow_offset = Vector2( 3, 3 )
 anti_aliasing = false
@@ -46,7 +46,7 @@ anti_aliasing = false
 [sub_resource type="StyleBoxFlat" id=6]
 content_margin_left = 8.0
 content_margin_right = 8.0
-bg_color = Color( 0.0313726, 0.0705882, 0.0392157, 1 )
+bg_color = Color( 0.07, 0.07, 0.07, 1 )
 shadow_color = Color( 0, 0, 0, 0.239216 )
 shadow_size = 1
 shadow_offset = Vector2( 3, 3 )
@@ -55,7 +55,7 @@ anti_aliasing = false
 [sub_resource type="StyleBoxFlat" id=7]
 content_margin_left = 8.0
 content_margin_right = 8.0
-bg_color = Color( 0.0470588, 0.109804, 0.0588235, 1 )
+bg_color = Color( 0.11, 0.11, 0.11, 1 )
 shadow_color = Color( 0, 0, 0, 0.239216 )
 shadow_size = 1
 shadow_offset = Vector2( 3, 3 )
@@ -64,7 +64,7 @@ shadow_offset = Vector2( 3, 3 )
 content_margin_left = 4.0
 content_margin_top = 6.0
 bg_color = Color( 0, 0, 0, 0 )
-shadow_color = Color( 0.0470588, 0.109804, 0.0588235, 1 )
+shadow_color = Color( 0.11, 0.11, 0.11, 1 )
 shadow_size = 1
 shadow_offset = Vector2( 3, 3 )
 anti_aliasing = false
@@ -81,7 +81,7 @@ anti_aliasing = false
 [sub_resource type="StyleBoxFlat" id=10]
 content_margin_left = 8.0
 content_margin_right = 8.0
-bg_color = Color( 0.0313726, 0.0705882, 0.0392157, 1 )
+bg_color = Color( 0.07, 0.07, 0.07, 1 )
 shadow_color = Color( 0, 0, 0, 0.239216 )
 shadow_size = 1
 shadow_offset = Vector2( 3, 3 )
@@ -147,8 +147,8 @@ margin_top = -12.0
 margin_right = 182.0
 margin_bottom = 4.0
 grow_horizontal = 0
-custom_fonts/font = ExtResource( 6 )
-text = "TOTAL = 0"
+custom_fonts/font = ExtResource( 2 )
+text = "?"
 align = 2
 valign = 2
 __meta__ = {
@@ -221,8 +221,8 @@ margin_top = -185.0
 margin_right = 182.0
 margin_bottom = -169.0
 grow_horizontal = 0
-custom_fonts/font = ExtResource( 6 )
-text = "TOTAL = 0"
+custom_fonts/font = ExtResource( 2 )
+text = "?"
 align = 2
 valign = 2
 __meta__ = {
@@ -253,28 +253,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HitButton" parent="DealingPanel" instance=ExtResource( 1 )]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -131.0
-margin_top = -66.0
-margin_right = -34.0
-margin_bottom = -27.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-disabled = true
-text = "HIT"
-
 [node name="StandButton" parent="DealingPanel" instance=ExtResource( 1 )]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
+anchor_top = 0.858
 anchor_bottom = 1.0
-margin_left = -255.0
-margin_top = -66.0
-margin_right = -144.0
+margin_left = 32.0
+margin_top = 0.0299683
+margin_right = 203.0
 margin_bottom = -27.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -285,6 +269,20 @@ custom_styles/disabled = SubResource( 5 )
 custom_styles/normal = SubResource( 6 )
 disabled = true
 text = "STAND"
+
+[node name="HitButton" parent="DealingPanel" instance=ExtResource( 1 )]
+anchor_left = 1.0
+anchor_top = 0.858
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -205.0
+margin_top = 0.0299683
+margin_right = -34.0
+margin_bottom = -27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+disabled = true
+text = "HIT"
 
 [node name="EndRoundButton" parent="DealingPanel" instance=ExtResource( 1 )]
 visible = false
@@ -356,7 +354,7 @@ margin_left = -215.0
 margin_top = -243.0
 margin_right = 215.0
 margin_bottom = -195.0
-custom_constants/separation = 18
+custom_constants/separation = 10
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -371,7 +369,7 @@ margin_left = -215.0
 margin_top = -181.0
 margin_right = 215.0
 margin_bottom = -133.0
-custom_constants/separation = 18
+custom_constants/separation = 10
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -458,8 +456,8 @@ __meta__ = {
 [node name="TextTimer" type="Timer" parent="Dealer"]
 wait_time = 0.03
 autostart = true
-[connection signal="pressed" from="DealingPanel/HitButton" to="." method="_on_HitButton_pressed"]
 [connection signal="pressed" from="DealingPanel/StandButton" to="." method="_on_StandButton_pressed"]
+[connection signal="pressed" from="DealingPanel/HitButton" to="." method="_on_HitButton_pressed"]
 [connection signal="pressed" from="DealingPanel/EndRoundButton" to="." method="_on_EndRoundButton_pressed"]
 [connection signal="pressed" from="BettingPanel/PlaceBetButton" to="." method="_on_PlaceBetButton_pressed"]
 [connection signal="quit_pressed" from="TopBar" to="." method="_on_TopBar_quit_pressed"]

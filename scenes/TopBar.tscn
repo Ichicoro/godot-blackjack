@@ -84,12 +84,17 @@ script/source = "extends Label
 tool
 
 func _ready():
-	var time = OS.get_time()
-	self.text = \"%d:%d\" % [time.hour, time.minute]
+	set_time()
 
 func _process(delta):
+	set_time()
+
+
+func set_time():
 	var time = OS.get_time()
-	self.text = \"%d:%d\" % [time.hour, time.minute]
+	var hour = \"%d\" % time.hour if time.hour >= 10 else \"0%d\"%time.hour
+	var minutes = \"%d\" % time.minute if time.minute >= 10 else \"0%d\"%time.minute
+	self.text = \"%s:%s\" % [hour, minutes]
 "
 
 [node name="Control" type="Control"]
@@ -148,7 +153,7 @@ margin_bottom = 12.5
 grow_horizontal = 2
 grow_vertical = 2
 custom_fonts/font = ExtResource( 3 )
-text = "0:37"
+text = "14:49"
 align = 1
 valign = 1
 script = SubResource( 5 )

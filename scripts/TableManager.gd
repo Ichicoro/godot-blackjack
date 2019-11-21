@@ -44,6 +44,8 @@ func _ready():
 	
 	# Setup deck
 	deck = Card.generate_deck()
+	#deck.push_front({"card_type": Card.CardType.ACE, "card_sign": Card.CardSign.DIAMONDS})
+	#deck.push_front({"card_type": Card.CardType.TEN, "card_sign": Card.CardSign.DIAMONDS})
 	
 	# Set round state
 	set_round_state(RoundState.BETTING)
@@ -53,7 +55,7 @@ func _ready():
 		child.queue_free()
 	for child in lower_buttons_container.get_children():
 		child.queue_free()
-	for i in [1, 10, 25, 100]:
+	for i in [1, 10, 25, 100, 1000]:
 		var btn = BettingButton.instance()
 		btn.text = "+" + str(i)
 		btn.connect("pressed_betting_button", self, "handle_bet_button")
@@ -121,13 +123,13 @@ func deal_card(which, to_who: int, flipped = false):
 	hand_container.add_child(card)
 	if to_who == Hand.PLAYER:
 		var total_label = $DealingPanel/PlayerHandTotal
-		total_label.text = "TOTAL = %s" % str(get_hand_value(to_who))
+		total_label.text = str(get_hand_value(to_who))
 	else:
 		var total_label = $DealingPanel/DealerHandTotal
 		var thing = str(get_hand_value(to_who))
 		if len(dealer_hand_container.get_children()) <= 2:
 			thing = "?"
-		total_label.text = "TOTAL = %s" % thing
+		total_label.text = thing
 
 
 func handle_bet_button(amount):
@@ -150,13 +152,13 @@ func _on_PlaceBetButton_pressed():
 
 
 func check_cards():
-	if round_state == RoundState.DEALING_TO_PLAYER:
+	if round_state == RoundState.DEALING_TO_PLAYER || round_state == RoundState.IDLE:
 		var hand_value = get_hand_value(Hand.PLAYER)
 		if hand_value > 21:
 			set_round_state(RoundState.ENDED)
-			dealer_label.set_text("Too bad! You've gone over.")
+			show_alert("Over!")
 		elif hand_value == 21:
-			dealer_label.set_text("Nice! A blackjack!")
+			show_alert("Blackjack!")
 			UserData.credit += player_bet*2
 			set_round_state(RoundState.ENDED)
 		else:
@@ -165,17 +167,17 @@ func check_cards():
 		set_round_state(RoundState.ENDED)
 		var hand_value = get_hand_value(Hand.DEALER)
 		if hand_value > 21:
-			dealer_label.set_text("Aw, too bad. I busted...")
+			show_alert("You win!")
 			UserData.credit += player_bet*2
 		else:
 			if get_hand_value(Hand.PLAYER) > hand_value:
-				dealer_label.set_text("Nice job! You've won $%d" % player_bet)
+				show_alert("You win!")
 				UserData.credit += player_bet*2
 			elif get_hand_value(Hand.PLAYER) == hand_value:
-				dealer_label.set_text("And.. it's a DRAW!")
+				show_alert("DRAW!")
 				UserData.credit += player_bet
 			else:
-				dealer_label.set_text("You've lost! I AM ZE BEST :>")
+				show_alert("You lose :(")
 	return round_state == RoundState.ENDED
 
 
@@ -242,10 +244,15 @@ func _on_HitButton_pressed():
 
 
 func _on_StandButton_pressed():
-	if check_cards(): return							### FIXME
+#	if check_cards(): return							### FIXME
+	if get_hand_value(Hand.PLAYER) == 21:
+		yield(get_tree().create_timer(0.3), "timeout")
+		dealer_hand_container.get_children()[1].flipped = false
+		check_cards()
+		return
 	yield(get_tree().create_timer(0.3), "timeout")
 	dealer_hand_container.get_children()[1].flipped = false
-	$DealingPanel/DealerHandTotal.text = "TOTAL = %s" % str(get_hand_value(Hand.DEALER))
+	$DealingPanel/DealerHandTotal.text = str(get_hand_value(Hand.DEALER))
 	
 	set_round_state(RoundState.DEALING_TO_DEALER)
 	while (get_hand_value(Hand.DEALER) < 15) or (get_hand_value(Hand.DEALER) < get_hand_value(Hand.PLAYER) and get_hand_value(Hand.DEALER)<19):
@@ -263,3 +270,7 @@ func _on_EndRoundButton_pressed():
 func _on_TopBar_quit_pressed():
 	yield(get_tree().create_timer(0.3), "timeout")
 	get_tree().change_scene("res://scenes/MainMenu.tscn")
+
+
+func show_alert(text):
+	get_tree().root.add_child(Alert.show_alert(text))
