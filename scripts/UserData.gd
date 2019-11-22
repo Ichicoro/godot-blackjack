@@ -1,10 +1,12 @@
 extends Node
 
 signal credit_changed(new_credit)
+signal background_changed(type)
 
 var credit = 1000 setget set_credit
 var music_enabled: bool = true setget set_music_enabled
 var sounds_enabled: bool = true setget set_sounds_enabled
+var chosen_background: int = 0 setget set_chosen_background
 
 func _ready():
 	load_data()
@@ -17,6 +19,7 @@ func save_data():
 	save_game.store_16(credit)
 	save_game.store_8(music_enabled)
 	save_game.store_8(sounds_enabled)
+	save_game.store_8(chosen_background)
 	save_game.close()
 
 
@@ -29,6 +32,7 @@ func load_data():
 	set_credit(save_game.get_16(), false)
 	music_enabled = save_game.get_8()
 	sounds_enabled = save_game.get_8()
+	chosen_background = save_game.get_8()
 	save_game.close()
 
 
@@ -46,3 +50,9 @@ func set_music_enabled(enabled):
 func set_sounds_enabled(enabled):
 	sounds_enabled = enabled
 	save_data()
+
+
+func set_chosen_background(id):
+	chosen_background = id
+	save_data()
+	emit_signal("background_changed", id)

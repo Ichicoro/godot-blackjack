@@ -118,6 +118,7 @@ card_sign = 3
 anchor_bottom = 0.0
 margin_bottom = 47.0
 exit_button_enabled = false
+clock_enabled = true
 
 [node name="PlayButton" parent="." instance=ExtResource( 4 )]
 anchor_left = 0.5

@@ -10,11 +10,17 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Control",
+"class": "BackgroundPanel",
+"language": "GDScript",
+"path": "res://scripts/BackgroundPanel.gd"
+}, {
+"base": "Control",
 "class": "Card",
 "language": "GDScript",
 "path": "res://scripts/Card.gd"
 } ]
 _global_script_class_icons={
+"BackgroundPanel": "",
 "Card": ""
 }
 
