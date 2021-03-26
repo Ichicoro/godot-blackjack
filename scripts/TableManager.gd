@@ -71,7 +71,7 @@ func _ready():
 
 
 func get_hand_value(whose: int):
-	var hand_container: Card = player_hand_container if whose==Hand.PLAYER else dealer_hand_container
+	var hand_container: GridContainer = player_hand_container if whose==Hand.PLAYER else dealer_hand_container
 	var hand = hand_container.get_children()
 	
 	var aces = 0
@@ -117,7 +117,7 @@ func set_round_state(state):
 
 
 func deal_card(which, to_who: int, flipped = false):
-	var hand_container: Card = player_hand_container if to_who==Hand.PLAYER else dealer_hand_container
+	var hand_container: GridContainer = player_hand_container if to_who==Hand.PLAYER else dealer_hand_container
 	var card = CardScene.instance().init(Card.CardSign[which.card_sign], Card.CardType[which.card_type])
 	card.flipped = flipped
 	hand_container.add_child(card)

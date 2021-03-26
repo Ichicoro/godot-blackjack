@@ -62,6 +62,7 @@ margin_right = 5.92
 margin_bottom = 101.256
 rect_rotation = -19.3
 rect_scale = Vector2( 3, 3 )
+flipped = false
 
 [node name="Card2" parent="Cards" instance=ExtResource( 5 )]
 margin_left = 360.0
@@ -72,6 +73,7 @@ rect_rotation = 19.3
 rect_scale = Vector2( 3, 3 )
 card_type = 13
 card_sign = 3
+flipped = false
 
 [node name="Card4" parent="Cards" instance=ExtResource( 5 )]
 anchor_left = 1.0
@@ -86,6 +88,7 @@ rect_rotation = -44.9999
 rect_scale = Vector2( 3, 3 )
 card_type = 10
 card_sign = 1
+flipped = false
 
 [node name="Card3" parent="Cards" instance=ExtResource( 5 )]
 anchor_left = 1.0
@@ -99,6 +102,7 @@ margin_bottom = -42.9999
 rect_rotation = -15.0
 rect_scale = Vector2( 3, 3 )
 card_type = 2
+flipped = false
 
 [node name="Card5" parent="Cards" instance=ExtResource( 5 )]
 anchor_left = 1.0
@@ -113,6 +117,7 @@ rect_rotation = 15.0
 rect_scale = Vector2( 3, 3 )
 card_type = 5
 card_sign = 3
+flipped = false
 
 [node name="TopBar" parent="." instance=ExtResource( 2 )]
 anchor_bottom = 0.0
