@@ -18,10 +18,40 @@ _global_script_classes=[ {
 "class": "Card",
 "language": "GDScript",
 "path": "res://scripts/Card.gd"
+}, {
+"base": "HBoxContainer",
+"class": "ContributorClass",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/ContributorClass.gd"
+}, {
+"base": "PanelContainer",
+"class": "GistItem",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/GistItem.gd"
+}, {
+"base": "HBoxContainer",
+"class": "InvitationItem",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/InvitationItem.gd"
+}, {
+"base": "PanelContainer",
+"class": "RepositoryItem",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/RepositoryItem.gd"
+}, {
+"base": "Control",
+"class": "SafeAreaContainer",
+"language": "GDScript",
+"path": "res://scripts/SafeAreaContainer.gd"
 } ]
 _global_script_class_icons={
 "BackgroundPanel": "",
-"Card": ""
+"Card": "",
+"ContributorClass": "",
+"GistItem": "",
+"InvitationItem": "",
+"RepositoryItem": "",
+"SafeAreaContainer": ""
 }
 
 [application]
@@ -36,7 +66,6 @@ run/low_processor_mode.mobile=false
 
 [autoload]
 
-UserData="*res://scripts/UserData.gd"
 Alert="*res://scripts/Alert.gd"
 
 [display]
@@ -47,6 +76,10 @@ window/dpi/allow_hidpi=true
 window/handheld/orientation="portrait"
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "godot-git-control.funabab" )
 
 [gdnative]
 

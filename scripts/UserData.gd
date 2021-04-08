@@ -3,6 +3,8 @@ extends Node
 signal credit_changed(new_credit)
 signal background_changed(type)
 
+var save_version: int = 0
+
 var credit = 1000 setget set_credit
 var music_enabled: bool = true setget set_music_enabled
 var sounds_enabled: bool = true setget set_sounds_enabled
@@ -16,6 +18,7 @@ func save_data():
 	var save_game: File = File.new()
 	save_game.open("user://save_data.dat", File.WRITE)
 	save_game.seek(0)
+	save_game.store_16(save_version)
 	save_game.store_16(credit)
 	save_game.store_8(music_enabled)
 	save_game.store_8(sounds_enabled)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/big_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/buttons/exit_button.png" type="Texture" id=2]
@@ -97,6 +97,10 @@ func set_time():
 	self.text = \"%s:%s\" % [hour, minutes]
 "
 
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.133333, 0.133333, 0.133333, 1 )
+border_color = Color( 0.184314, 0.184314, 0.184314, 1 )
+
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 0.092
@@ -153,10 +157,18 @@ margin_bottom = 12.5
 grow_horizontal = 2
 grow_vertical = 2
 custom_fonts/font = ExtResource( 3 )
-text = "14:49"
+text = "21:14"
 align = 1
 valign = 1
 script = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel2" type="Panel" parent="."]
+anchor_right = 1.0
+margin_top = -65.0
+custom_styles/panel = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
